@@ -197,13 +197,16 @@ header .navbar-brand {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: x-small;
+  font-size: small;
   margin: 20px;
+}
+
+.footer-info-container .thanks a {
+  color: #ff7675;
 }
 
 .footer-info-container .logo-container a {
   font-size: 1.5rem;
-  text-decoration: none;
   color: black;
   margin-bottom: 10px;
 }
