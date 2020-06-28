@@ -153,8 +153,8 @@ import "./desqus.js";
   };
   // Load the image model and setup the webcam
   const init = async () => {
-    const modelURL = isMale ? URL[0] : URL[1] + "model.json";
-    const metadataURL = isMale ? URL[0] : URL[1] + "metadata.json";
+    const modelURL = (isMale ? URL[0] : URL[1]) + "model.json";
+    const metadataURL = (isMale ? URL[0] : URL[1]) + "metadata.json";
     // load the model and metadata
     // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
     // or files from your local hard drive
@@ -176,7 +176,7 @@ import "./desqus.js";
     showResult();
   };
 
-  //사진 업로드시 분석 진행,
+  //사진 업로드시 분석 행,
   const onChange = (e) => {
     const {
       target: { files },
