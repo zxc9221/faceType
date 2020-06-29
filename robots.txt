@@ -1,0 +1,4 @@
+user-Agent:*
+Allow: /
+
+Sitemap: https://myfacetype.site/sitemap.xml
