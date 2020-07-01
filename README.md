@@ -1,8 +1,7 @@
 # AI 얼굴형 테스트 with Google Teachable Machines
 
 - Html, CSS, JavaSciprt, Google Teachable Machine 활용 얼굴형 테스트
-
-데모 [https://myfacetype.netlify.app/]
+- 데모 [https://myfacetype.netlify.app/]
 
 ### 얼굴형 사진 데이터
 
