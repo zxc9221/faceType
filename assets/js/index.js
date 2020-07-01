@@ -7,10 +7,9 @@ import "./desqus.js";
     imageContainer = document.querySelector(".image-container"),
     image = document.querySelector(".image-container .uploaded-image"),
     resultContainer = document.querySelector(".result-container");
-  const URL = [
-    "https://teachablemachine.withgoogle.com/models/Y-Co67h1I/",
-    "https://teachablemachine.withgoogle.com/models/loodq_8rz/",
-  ];
+  const URL = "https://teachablemachine.withgoogle.com/models/dHp8p6nGI/";
+  //"https://teachablemachine.withgoogle.com/models/Y-Co67h1I/",
+  //"https://teachablemachine.withgoogle.com/models/loodq_8rz/",
 
   let isMale = true,
     model,
@@ -102,16 +101,34 @@ import "./desqus.js";
       },
     },
   };
-
-  //분석 결과 출력
-  const showResult = () => {
-    let result = [],
-      maxValue = 0;
+  const showItems = (result) => {
     const title = resultContainer.querySelector(".result-title"),
       content = resultContainer.querySelector(".result-content p"),
       hair = resultContainer.querySelector(".result-hair p"),
       image = resultContainer.querySelector(".type-image"),
       recommend = resultContainer.querySelector(".recommend");
+    if (result.title !== undefined) {
+      title.textContent = `당신의 얼굴은 ${result.title} 입니다`;
+      content.textContent = `${result.content}`;
+      hair.textContent = isMale
+        ? `${result.male.hair}`
+        : `${result.female.hair}`;
+      image.src = `${result.typeImage}`;
+      image.alt = `${result.type}`;
+      recommend.textContent = `추천 스타일: ${(isMale
+        ? result.male.recommend
+        : result.female.recommend
+      ).join(",")}`;
+    } else {
+      title.textContent = `알수없음`;
+      resultContainer.querySelector(".result-hair h3").textContent = "";
+      resultContainer.querySelector(".result-content h3").textContent = "";
+    }
+  };
+  //분석 결과 출력
+  const showResult = () => {
+    let result = [],
+      maxValue = 0;
     Object.keys(resultObj).forEach((item) => {
       if (maxValue < resultObj[item]) {
         maxValue = resultObj[item];
@@ -121,17 +138,20 @@ import "./desqus.js";
     resultContainer.classList.remove("hide");
     resultContainer.classList.add("show");
 
-    title.textContent = `당신의 얼굴은 ${types[result[0]].type} 입니다`;
-    content.textContent = `${types[result[0]].content}`;
-    hair.textContent = isMale
-      ? `${types[result[0]].male.hair}`
-      : `${types[result[0]].female.hair}`;
-    image.src = `${types[result[0]].typeImage}`;
-    image.alt = `${types[result[0]].type}`;
-    recommend.textContent = `추천 스타일: ${(isMale
-      ? types[result[0]].male.recommend
-      : types[result[0]].female.recommend
-    ).join(",")}`;
+    showItems(types[result[0]]);
+    /*if (types[result[0]].type !== undefined) {
+      title.textContent = `당신의 얼굴은 ${types[result[0]].type} 입니다`;
+      content.textContent = `${types[result[0]].content}`;
+      hair.textContent = isMale
+        ? `${types[result[0]].male.hair}`
+        : `${types[result[0]].female.hair}`;
+      image.src = `${types[result[0]].typeImage}`;
+      image.alt = `${types[result[0]].type}`;
+      recommend.textContent = `추천 스타일: ${(isMale
+        ? types[result[0]].male.recommend
+        : types[result[0]].female.recommend
+      ).join(",")}`;
+    }*/
   };
   const selectGender = (e) => {
     const { target } = e,
@@ -153,8 +173,8 @@ import "./desqus.js";
   };
   // Load the image model and setup the webcam
   const init = async () => {
-    const modelURL = (isMale ? URL[0] : URL[1]) + "model.json";
-    const metadataURL = (isMale ? URL[0] : URL[1]) + "metadata.json";
+    const modelURL = URL + "model.json";
+    const metadataURL = URL + "metadata.json";
     // load the model and metadata
     // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
     // or files from your local hard drive
