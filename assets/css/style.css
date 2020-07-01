@@ -194,6 +194,7 @@ header .navbar-brand {
 .result-content,
 .result-hair {
   margin-top: 10px;
+  width: 80%;
 }
 
 .result-hair .recommend {
@@ -250,6 +251,10 @@ header .navbar-brand {
   color: black;
 }
 
+.share-container {
+  margin: 10px;
+}
+
 @keyframes loadingAnimation {
   from {
     transform: rotate(0deg);
@@ -263,6 +268,7 @@ header .navbar-brand {
   .result-title {
     font-size: 1rem;
   }
+
   .result-content p,
   .result-hair p,
   .recommend {
