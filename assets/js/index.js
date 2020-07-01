@@ -8,8 +8,6 @@ import "./desqus.js";
     image = document.querySelector(".image-container .uploaded-image"),
     resultContainer = document.querySelector(".result-container");
   const URL = "https://teachablemachine.withgoogle.com/models/dHp8p6nGI/";
-  //"https://teachablemachine.withgoogle.com/models/Y-Co67h1I/",
-  //"https://teachablemachine.withgoogle.com/models/loodq_8rz/",
 
   let isMale = true,
     model,
@@ -107,8 +105,8 @@ import "./desqus.js";
       hair = resultContainer.querySelector(".result-hair p"),
       image = resultContainer.querySelector(".type-image"),
       recommend = resultContainer.querySelector(".recommend");
-    if (result.title !== undefined) {
-      title.textContent = `당신의 얼굴은 ${result.title} 입니다`;
+    if (result.type !== undefined) {
+      title.textContent = `당신의 얼굴은 ${result.type} 입니다`;
       content.textContent = `${result.content}`;
       hair.textContent = isMale
         ? `${result.male.hair}`
@@ -137,21 +135,7 @@ import "./desqus.js";
     });
     resultContainer.classList.remove("hide");
     resultContainer.classList.add("show");
-
     showItems(types[result[0]]);
-    /*if (types[result[0]].type !== undefined) {
-      title.textContent = `당신의 얼굴은 ${types[result[0]].type} 입니다`;
-      content.textContent = `${types[result[0]].content}`;
-      hair.textContent = isMale
-        ? `${types[result[0]].male.hair}`
-        : `${types[result[0]].female.hair}`;
-      image.src = `${types[result[0]].typeImage}`;
-      image.alt = `${types[result[0]].type}`;
-      recommend.textContent = `추천 스타일: ${(isMale
-        ? types[result[0]].male.recommend
-        : types[result[0]].female.recommend
-      ).join(",")}`;
-    }*/
   };
   const selectGender = (e) => {
     const { target } = e,
